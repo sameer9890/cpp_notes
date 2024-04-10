@@ -1,0 +1,57 @@
+Answers the followings:
+ 1. Write five main differences between C and C++. 
+2. Write three main differences between inline functions and macros with parameters. 
+3. What is name mangling in C++? 
+4. What are the differences between pointers and references? 
+5. What is there is no null reference? 
+6. Why we use operator overloading? 
+7. What is an automatic default constructor, and what does it do? 
+8. When is it appropriate to use a const reference parameter? Give a small example as part of your 
+answer? 
+9. What are the differences between variable declaration and variable definition? 
+10. What is the significance of wchar_t keyword? 
+11. What are the manipulators in C++? 
+12. Differences between new operator and malloc function. 
+
+ Question Bank – Advanced C++ & Data Structures (Solved) 
+13. What are constant member functions? 
+14. In what situations a copy constructor is invoked. 
+15. What is initializer list? 
+16. What are template classes? 
+17. What are the operators that cannot be overloaded? 
+18. What are constant member functions? 
+19. When do you need deep copying? 
+20. Are templates memory efficient and why? 
+21. What is a conversion constructor? 
+22. What is the significant of this keyword? 
+23. When you use static data members. Given an example. 
+24. What is the use of mutable data members? 
+25. What are the smart pointers? 
+26. What is the difference between multiple inheritance and multilevel inheritance? 
+27. What is the difference between overloading and overriding? 
+28. What is the significant of  ‘vptr’ in virtual functions. 
+29. How is the runtime polymorphism implemented in C++? 
+30. Write difference types of polymorphisms in C++. 
+31. What is the significant of pure virtual functions in C++. 
+32. Write different types of exceptions in C++. 
+33. What is the use of dynamic_cast in C++. 
+34. Write five examples for STL sequence containers. 
+35. What do you mean by dangling pointer. 
+36. Write the steps to delete a node with two children in binary search tree. 
+37. What are iterators? 
+38. What are namespaces? What is the advantage of having a namespace? Give suitable examples 
+39. Why static member functions do not receive ‘this’ pointer? 
+40. What do you mean by abstraction? 
+41. What do you mean by encapsulation? 
+42. What are template classes? 
+43. Write the syntax for defining a function outside the class. 
+44. Write a operator + of the string class which append two strings. The string is stored within the class as 
+data, which is char[50]. 
+45. What is binding? Describe static and run time binding. 
+46. Write a function template that takes five parameters  and returns the maximum of them. Also it is to be 
+initialized using int and float. 
+47. Why do we need virtual destructors? 
+48. It is legal to return local variables from a function which returns by reference. State true/ false with 
+justification. 
+49. Write a code to initialize the pointer to a data member of a class. 
+50. Static member functions do not receive ‘this’ pointer. State true/ false with justification. 

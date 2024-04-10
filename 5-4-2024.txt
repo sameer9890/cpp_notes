@@ -1,0 +1,1197 @@
+Manipulators in C++ 
+
+Manipulator are used in c++ for formatting output.
+Manipulators specifically designed to be used in conjunction with the insertion (<<) and extraction (>>) operators on stream objects.
+To access manipulators, the file iomanip.h should be included in the program.
+ 
+The iostream.h and iomanip.h header file has several pre-defined manipulators.
+
+There are 2 types of manipulators
+1)Manipulator operator
+Manipulators without arguments
+
+C++ manipulator endl function is used to insert a new line character
+Working of endl manipulator is similar to '\n' character in C++. It prints the output of the following statement in the next line.
+#include <iostream>     // std::cout, std::end  
+using namespace std;  
+  
+int main () {  
+  
+  int a=100;  
+  double b=3.14;  
+  
+  cout << a;  
+  cout << endl;              // manipulator inserted alone  
+  cout << b << endl << a*b;  // manipulator in concatenated insertion  
+
+}  
+==========================================
+
+2)Manipulator Function
+manipulator are used to change the output results.
+1)setw-->in c when we used \t we get spaces. but my req is to perform formated output.
+here setw means set width,here it will allocate specify number of spaces on the screen and it is going to print text from right to left.
+printf() ,cout --->print output from left to right
+setw print output from right to left
+
+cout<<"1\n10\n100\n";
+output is 1
+		1 0
+		1 0 0
+result     3  0 0
+
+our requirement is  
+		1 
+	1	0
+1	0	0
+result 111
+
+print matter from right to left go for setw.
+
+cout<< setw(5)<<1<<endl;//5 means no of spaces
+leave 5 space
+    1
+cout<<setw(5)<<10<<endl;
+   10
+cout<<setw(5)<<100
+  100
+//easy to calculate bill
+====================================
+setfill()-->fill space with some symbol;
+cout<<setfill('*');
+cout<<setw(5)<<1<<endl
+//****1
+
+setfill works with setw.  when setw is der then only setfill is implemented.
+
+===================================================
+cout<<setfill('*');
+cout<<setw(5)<<1<<endl
+cout<<setfill('*');
+cout<<setw(5)<<10<<endl
+cout<<setfill(' ');//when we dont want * symbol.setfill continue untill we write setfill(' ')
+cout<<setw(5)<<100<<endl
+
+output ****1
+	      ***10
+		  100
+================
+setprecision()
+
+cout<<22/7.0;
+//3.142758
+here  we give priority 1 or 2 decimal no,truncate the remaining decimal points
+for this setprecision () is used to indicate no of decimal places in floating values.
+
+cout<<setprecision(2)<<22/7.0;//no of decimal
+//3.1
+setprecision() will not work for integer data
+
+cout<<setprecision(2)<<124;//not work for integer will print as it is.
+
+==================================================
+setbase() -- use to set the base value.
+
+ 65  is decimal no ,I want to print octal no ,..65 octal number is 
+cout<<setbase(8)<<65; // 65/8-->8 1  //8/8 --->1 0
+//1  0 1 is the octal value for 65
+
+cout<<setbase(16)<<65; //65/16-->4 1 // 
+//4 1 is hexa decimal format of 65
+
+I want to print 101 in decimal no
+cout<<setbase(10)<<0101;
+//  65------->octal no is converted into decimal
+
+cout<<setbase(10)<<0x41;//convert hexa into decimal no
+//65
+
+==>to convert the number system from 1 format to another use setbase()
+========================================================================
+#include<iostream>
+using namespace std;
+ 
+int main() 
+ 
+{ 
+      char name[125]; 
+      cout << "Enter your name" << endl; 
+  
+      cin.getline(name,125); 
+ 
+      cout << name << endl; 
+       
+      return 0;
+}
+
+=======================================================
+set ios flags:
+
+ios flag is used to set diff types of flags in our program.
+ex: setw is repesent from  l to r
+name is repesent from r to l
+
+ex:i want to maintain name from l to r with mainitaing equal space
+cout<<setw(10)<<setiosflags(ios::l)<<"rama";
+==========================================
+i want to use setiosflag with numbers system
+#include<iostream>
+#include<ios>
+#include<iomanip>
+using namespace std;
+ 
+ 
+int main() 
+ 
+{ 
+cout<<setiosflags(ios::oct)<<65 ; //101 ------>65 octal no----->convert dec to octal
+cout<<setiosflags(ios::hex)<<65 ; //4 1 ---------->65 hexa number
+cout<<setiosflags(ios::dec)<<0101 ;//65 -------->--->octal to dec
+
+
+}
+===========================================
+setios flag for sign representation---> when u want to display + sign before any positive number
+use showpos flag
+cout<<setiosflags(ios::showpos)<<100;//+100
+cout<<setiosflags(ios::showpos)<<-100;//-100
+
+//work only for positive no
+
+====================================================
+======================================================
+suppose there is big floating no,i want to display in scientific notataion
+cout<<2434.122233444;
+cout<<setioflags(ios::scientific)<<234.12345; // to convert floating into scientific
+called as manipulator used to format the cout results.
+==========================================================================================================
+
+
+
+=========================================================================================
+Math library functions
+
+C++ being a superset of C, supports a large number of useful mathematical functions. These functions are available in standard C++ to support various mathematical calculations.
+
+Instead of focusing on implementation, these functions can be directly used to simplify code and programs. In order to use these functions you need to include a header file- <math.h> or <cmath>.
+
+sqrt()	This function takes a number as an argument and returns its square root value. The number can not be a negative value.
+Consider a argument 'arg' :
+square_root of a number=√arg  
+Syntax
+Syntax would be :
+
+double sqrt(double arg);  
+float sqrt(float arg);    
+double sqrt(integral arg);  
+
+// CPP Program to demonstrate errors in double sqrt()
+#include <cmath>
+#include <iostream>
+using namespace std;
+ 
+
+int main()
+{
+    double answer;
+    answer = sqrt(10);
+    cout << "Square root of " << " is " << answer;
+     return 0;
+}
+
+If we pass a negative value in the argument domain error occurs and the output will be the Square root of -a, which is -nan.
+==============================================================================================
+int abs(int)	This function takes an integer number as an argument and returns its absolute value. It means the output will always be positive regardless of the sign of the input.
+
+// CPP program to illustrate
+// abs() function
+#include <math.h>
+#include <iostream>
+ 
+using namespace std;
+ 
+int main()
+{
+    int val1, val2;
+ 
+    /// finding absolute value using
+    /// abs() function.
+    val1 = abs(0.6);
+    val2 = abs(-43);
+ 
+    cout << "abs= " << val1 << "\n";
+    cout << "abs(-43) = " << val2 << "\n";
+    return 0;
+}
+
+double pow(double, double)	This function takes one argument as base and another as exponent.
+Consider a base 'b' and exponent 'e'.
+Power=be
+Syntax
+Its syntax would be :
+
+double pow(double b, double e);  
+float pow(float b, float e);  
+
+#include <iostream>  
+#include<cmath>  
+using namespace std;  
+int main()  
+{  
+int base=4;  
+  int exponent=2;  
+  int power=pow(base,exponent);  
+  std::cout << "Power of a given number is :" <<power;  
+  return 0;  
+}  
+Output:
+
+Power of a given number is :16
+=============================================================
+C++ Math ceil()
+It rounds the value to the nearest integer which is not less than the given value.
+
+For example :
+ceil(8.1)=9.0;  
+ceil(-8.8)=-8.0;  
+
+Syntax
+Suppose a number is 'x'. Syntax would be:
+double ceil(double x);  
+Parameter
+x : It is the value that rounds to the nearest integer.
+Return value
+It returns the smallest integer value not less than x.
+
+Example 1
+Let's see a simple example by considering the positive value of x.
+
+#include <iostream>  
+#include<cmath>  
+using namespace std;  
+int main()  
+{  
+  float x=9.2;  
+  std::cout << "Initial value of x is :"<<x;  
+  cout<<'\n';  
+  cout<<"final value of x is :"<<ceil(x);  
+  return 0;  
+}  
+Output:
+
+Initial value of x is :9.2
+final value of x is :10   
+Example 2
+Let's see a simple example by considering the negative value of x.
+
+#include <iostream>  
+#include<cmath>  
+using namespace std;  
+int main()  
+{  
+  float x=-2.2;  
+  std::cout << "Initial value of x is :"<<x;  
+  cout<<'\n';  
+  cout<<"final value of x is :"<<ceil(x);  
+  return 0;  
+}  
+Output:
+
+Initial value of x is :-2.2
+final value of x is :-2   
+
+
+C++ Math floor()
+It rounds the value to the nearest integer which is not greater than the given value.
+
+For example:
+
+floor(8.2)=8.0;  
+floor(-8.8)=-9.0;  
+Syntax
+Suppose a number is 'x'. Syntax would be :
+
+double floor(double x);  
+Parameter
+x : It is the value that rounds to the nearest integer.
+
+Return value
+It returns the value that round to the nearest integer not greater than x.
+
+AD
+Example 1
+Let's see a simple example by considering a positive value.
+
+#include <iostream>  
+#include<math.h>  
+using namespace std;  
+int main()  
+{  
+ float x=7.8;  
+ std::cout << "Initial value of x is : " << x<<std::endl;  
+cout<<"Now, the value of x is :"<<floor(x);  
+ return 0;  
+}  
+Output:
+
+Initial value of x is : 7.8
+Now, the value of x is :7   
+Example 2
+Let's see a simple example by considering a negative value.
+
+#include <iostream>  
+#include<math.h>  
+using namespace std;  
+int main()  
+{  
+ float x=-10.2;  
+ std::cout << "Initial value of x is : " << x<<std::endl;  
+cout<<"Now, the value of x is :"<<floor(x);  
+ return 0;  
+}  
+Output:
+
+Initial value of x is : -10.2
+Now, the value of x is :-11  
+
+C++ Math round()
+This function is used to round off the given value which can be either float or double.
+
+For example:
+
+round(5.8)= 6;  
+round(-1.1)= -1;  
+Syntax
+Suppose a number is 'x'. Syntax would be:
+
+return_type round(data_type x);  
+Parameter
+x : The value which can be either float or double.
+
+Return value
+It returns the rounded value of x. The return type of the value can be float, double or long double.
+
+AD
+Example 1
+Let's see a simple example when the value of x is positive
+
+#include <iostream>  
+#include<math.h>  
+using namespace std;  
+int main()  
+{  
+    float x=8.3;  
+    std::cout << "The value of x is : " <<x<< std::endl;  
+    cout<<"Rounded value of x is : "<<round(x);  
+    return 0;  
+}  
+Output:
+
+The value of x is : 8.3
+Rounded value of x is : 8   
+Example 2
+Let's see a simple example when the value of x is negative.
+
+#include <iostream>  
+#include<math.h>  
+using namespace std;  
+int main()  
+{  
+    double x=-9.9;  
+    std::cout << "The value of x is : " <<x<< std::endl;  
+    cout<<"Rounded value of x is : "<<round(x);  
+    return 0;  
+}  
+Output:
+
+The value of x is : -9.9
+Rounded value of x is : -10
+
+
+// C++ program to illustrate some of the
+// above mentioned functions
+ 
+#include <iostream>
+#include <math.h>
+using namespace std;
+ 
+int main()
+{
+    double x = 2.3;
+    cout << "Sine value of x=2.3 : " << sin(x) << endl;
+    cout << "Cosine value of x=2.3 : " << cos(x) << endl;
+    cout << "Tangent value of x=2.3 : " << tan(x) << endl;
+ 
+    double y = 0.25;
+    cout << "Square root value of y=0.25 : " << sqrt(y)
+         << endl;
+ 
+    int z = -10;
+    cout << "Absolute value of z=-10 : " << abs(z) << endl;
+    cout << "Power value: x^y = (2.3^0.25) : " << pow(x, y)
+         << endl;
+ 
+    
+    x = 4.56;
+    cout << "Floor value of x=4.56 is : " << floor(x)
+         << endl;
+ 
+ 
+ 
+    y = 12.3;
+    cout << "Ceiling value of y=12.3 : " << ceil(y) << endl;
+ 
+  
+    y = 100.0;
+    // Natural base with 'e'
+    cout << "Log value of y=100.0 is : " << log(y) << endl;
+ 
+    return 0;
+}
+=================================
+  
+
+Enumeration in c++
+
+What Is C++ Enum?
+
+==>Enum, which is also known as enumeration, is a user-defined data type that enables you to create a new data type that has a fixed range of possible values, and the variable can select one value from the set of values. For example, suppose you are the owner of an ice cream shop, and you sell a limited range of ice cream flavors. So you want the customers to select only from that collection of ice creams in your shop. This becomes an enumeration with ice cream as the name of enumeration and different flavors of ice creams as its elements.
+
+==>Enumeration (Enumerated type) is a user-defined data type that can be assigned some limited values. These values are defined by the programmer at the time of declaring the enumerated type.
+
+Syntax:
+
+enum enumerated-type-name
+{
+    value1, value2, value3…..valueN
+};
+
+enum Iceccream
+{
+	vanilla,stawberry,mango
+};
+Each of these elements has values starting from 0, like vanilla is 0, stawberry is 1, etc. The default values mentioned can be altered during the declaration of the enum in C++.
+
+For Example: If a gender variable is created with the value male or female. If any other value is assigned other than male or female then it is not appropriate. In this situation, one can declare the enumerated type in which only male and female values are assigned.
+============================================================================
+Declaration
+To declare an enum variable, write the name of the enumeration along with the enum variable.
+
+enum Iceccream
+{
+	vanilla,stawberry,mango
+};
+int main()
+{
+	Icecream i;
+}
+Here i is the enum variable.
+===========================================================
+Example:
+
+//first_enum is the enumerated-type-name
+enum first_enum{value1=1, value2=10, value3};
+
+In this case, 
+first_enum e;
+e=value3;
+cout<<e;
+
+Output:
+11
+=========================================================
+// C++ Program to Demonstrate the Functioning of Enumerators 
+// with an example of Gender 
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+int main() 
+{ 
+    // Defining enum Gender 
+    enum Gender { Male, Female }; 
+  
+    // Creating Gender type variable 
+    Gender gender = Male; 
+  
+    switch (gender) { 
+    case Male: 
+        cout << "Gender is Male"; 
+        break; 
+    case Female: 
+        cout << "Gender is Female"; 
+        break; 
+    default: 
+        cout << "Value can be Male or Female"; 
+    } 
+    return 0; 
+}
+=====================================================================
+// C++ Program to Demonstrate the Functioning of Enumerators 
+// with an Example of Year 
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+// Defining enum Year 
+enum year { 
+    Jan, 
+    Feb, 
+    Mar, 
+    Apr, 
+    May, 
+    Jun, 
+    Jul, 
+    Aug, 
+    Sep, 
+    Oct, 
+    Nov, 
+    Dec 
+}; 
+  
+// Driver Code 
+int main() 
+{ 
+    int i; 
+  
+    // Traversing the year enum 
+    for (i = Jan; i <= Dec; i++) 
+        cout << i << " "; 
+  
+    return 0; 
+}
+
+Output: 
+0 1 2 3 4 5 6 7 8 9 10 11
+==============================================================
+Points to remember for C++ Enum
+enum improves type safety
+enum can be easily used in switch
+enum can be traversed
+The C++ enum constants are  final implicitly.
+
+If we assign a float value to a character value, then the compiler generates an error. In the same way, if we try to assign any other value to the enumerated data types, the compiler generates an error.
+
+
+#include <iostream>  
+using namespace std;  
+enum week { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday };  
+int main()  
+{  
+    week day;  
+    day = Friday;  
+    cout << "Day: " << day+1<<endl;  
+    return 0;  
+} 
+=======================================
+   #include <iostream>
+using namespace std;
+
+enum suit {
+    club = 0,
+    diamonds = 10,
+    hearts = 20,
+    spades = 3
+} card;
+
+int main() 
+{
+    card = club;
+    cout << "Size of enum variable " << sizeof(card) << " bytes.";   
+    return 0;
+}
+Output
+
+Size of enum variable 4 bytes.
+It's because the size of an integer is 4 bytes.; 
+
+Why enums are used in C++ programming?
+
+Enums are used to give names to constants, which makes the code easier to read and maintain.
+Use enums when you have values that you know aren't going to change, like month days, days, colors, deck of cards, etc.
+
+1)Enums or enumerations are generally used when you expect the variable to select one value from the possible set of values
+2)Enums are strongly typed, which means that the compiler will catch any errors at compile time rather than at runtime. ...
+3)readable: Enums provide a more readable way to define a fixed set of values. ...
+4)extensible: Enums can be extended to add new values.
+5)Enums are used when we know all possible values at compile time, such as choices on a menu, rounding modes
+=====================================================================
+
+==============================
+All the enum elements or constants should have a unique scope. It means that an element cannot be a part of two different enums in the same program as it will fail during compilation. Here’s an example:
+
+Example:
+
+
+enum Cars{Mahindra, Jeep, BMW};
+
+enum Luxury_Cars{BMW, Ferrari, Mercedes_Benz};
+
+int main(){
+
+    return 0;
+
+}
+
+==========================================================
+=================================================================
+
+
+
+
+TypeCasting operators in c++
+
+==Typecast is basically a type conversion i.e conversion from one type to another datatype.
+
+Typeconversion  in c++ is divided into 2 types
+1)implicit type cconersion: compiler implicitly does typecasting.
+'A'+10--One or another will be implicitly get typecasted by compiler implicitly.
+
+Type promotions:
+bool->char->int->long
+float->double
+
+ex:int a=10;
+char b='A';
+int c=a+b;
+
+-==>can result in loss of information.
+
+2)Explicit typeconversion is of 2 types:
+
+why typecasting is required or explicit conversion when compiler does implicit typecasting?
+
+==>float a=2.0;
+int b=2;
+int c=3;
+int d=a+b;//2.0+2==>4
+float e=c/b; //3/2===>1.0
+cout<<d;//4
+cout<<e;//1.0
+//not precise
+
+-==>can result in loss of information.
+
+
+1)C-style typecast===>traditional typecasting used in c lang.
+ex: char a='A';
+(int)a;
+
+(int)2.5==>2
+
+
+ex:int b=2;
+int c=3;
+float e=(float)c/b;
+cout<<e;
+
+
+
+2)using casting operators:
+Casting Operators===>Casting operators are used for type casting in C++.C++ supports four types of casts:
+
+static_cast
+dynamic_cast
+const_cast
+reinterpret_cast
+
+
+
+STATIC_CAST
+The static_cast operator is the most commonly used casting operator in C++. It performs compile-time type conversion .. It does things like implicit conversions between types (such as int to float, or pointer to void*), and it can also call explicit conversion functions.
+==>The static_cast operator performs a nonpolymorphic cast. 
+
+
+Syntax of static_cast
+static_cast <new_type> (expression);
+where,
+
+expression: Data to be converted.
+new_type: Desired type of expression
+The return value of static_cast will be of new_type.
+===================================================================================================
+//why static_cast is used?
+//IMPLICIT CONVERSIONS BETWEEN TYPES
+==>when implicit type conversion happens ,its better to use static_cast rather than relying on implicit conversions.
+
+#include <iostream>
+using namespace std;
+ 
+// Driver code
+int main()
+{
+    float f = 3.5;
+     // Implicit type case
+    // float to int
+    int a = f;
+    cout << "The Value of a: " << a;
+ 
+    // using static_cast for float to int
+    int b = static_cast<int>(f);
+    cout << "\nThe Value of b: " << b;
+}
+
+Output
+The Value of a: 3
+The Value of b: 3
+========================================================
+//prevents dangerous casts -more restrictive.
+
+==>integer pointer will think,I have 4 bytes in memory and I can modified this 4 bytes in the memory.
+assigned 10 as 00 00 00 11. it will lead to runtime error.
+beacause it expect that if u r having int pointer ,u can modify 4 bytes.
+
+
+// C++ Program to demonstrate 
+// static_cast char* to int*
+#include <iostream>
+using namespace std;
+ 
+// Driver code
+int main()
+{
+  int a = 10;
+  char c = 'a';
+ 
+  
+  int* q = (int*)&c;//allowed
+	*q1=10;   // Pass at compile time, may fail at run time
+  int* p = static_cast<int*>(&c);//compile time error
+
+  return 0;
+}
+
+Output
+
+error: invalid 'static_cast' from type 'int*' to type 'char*'
+Explanation: This means that even if you think you can somehow typecast a particular object pointer into another but it’s illegal, the static_cast will not allow you to do this.
+====================================================================
+
+void pointer
+
+In C++, a void pointer is a pointer that is declared using the ‘void‘ keyword (void*). It is different from regular pointers it is used to point to data of no specified data type. It can point to any type of data so it is also called a “Generic Pointer“. 
+
+Syntax of Void Pointer in C++
+void* ptr_name;
+As the type of data the void pointer is pointing to is unknown, we cannot dereference a void pointer.
+// C++ Program to demonstrate the declaration and use of a 
+// void pointer 
+  
+#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+    int a = 10; 
+  
+    // void pointer holds address of int 'a' 
+    void* myptr = &a; 
+    // printing the value of a and adress of a stored in 
+    // myptr 
+    cout << "The value of a is: " << a << endl; 
+    cout << "The Adress of a is  " << myptr << endl; 
+}
+
+USAGE:
+
+The concept of a generic pointer means a pointer that can be used to point to data of any data type. This is helpful in situations where you need a single pointer that can handle different data types dynamically.
+
+// C++ Program to demonstrate the use of void pointer 
+// to hold the address of any type-castable type 
+  
+#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+    // Initializing multiple variables of different data 
+    // type 
+    int n = 10; 
+    float f = 25.25; 
+    char c = '$'; 
+  
+    // Initializing a void pointer 
+    void* ptr; 
+  
+    ptr = &n; // pointing to int 
+    cout << "The value of n " << n << endl; 
+    cout << "The Adress of n " << ptr << endl; 
+  
+    ptr = &f; // pointing to float 
+    cout << "The value of n " << f << endl; 
+    cout << "The Adress of n " << ptr << endl; 
+  
+    ptr = &c; // pointing to char 
+    cout << "The value of n " << c << endl; 
+    cout << "The Adress of n " << ptr << endl; 
+}
+
+Output
+The value of n 10
+The Adress of n 0x7ffe05023434
+The value of n 25.25
+The Adress of n 0x7ffe05023430
+The value of n $
+The Adress of n 0x7ffe0502342f
+Explanation: In the above Code, We declared a void pointer as the variable name “ptr” which acts as a generic pointer or void pointer. This pointer stores multiple datatype addresses like int, char and float. We Typecasted the void pointer to any data type (float, char, int). Hence Void Pointer allows us to change the addresses for different memory addresses of different data types.
+
+//The below program demonstrate the use of void pointer to dynamically allocate memory for any data type.
+#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+   int n = 10; 
+  
+    void* voidPtr; 
+  
+    voidPtr = &n; // pointing to int 
+  
+    // Type casting the void pointer to int* for usage 
+    int* intPtr = static_cast<int*>(voidPtr); 
+  
+    // Assign a value to the allocated memory 
+    *intPtr = 42; 
+  
+    // Print the value from the allocated memory 
+    cout << "Value from allocated memory: " << *intPtr 
+         << endl; 
+  
+    
+  
+    return 0; 
+}
+
+
+============================================================================
+4)static_cast to Cast ‘to and from’ Void Pointer
+static_cast operator allows casting from any pointer type to void pointer and vice versa.
+
+Example:
+
+C++
+   
+// C++ program to demonstrate 
+// static_cast to cast 'to and  from' the void pointer
+#include <iostream>
+using namespace std;
+ 
+// Driver code
+int main()
+{
+  int i = 10;
+  void* v = static_cast<void*>(&i);
+  int* ip = static_cast<int*>(v);
+  cout << *ip;
+  return 0;
+}
+
+Output
+10
+============================================================
+Dynamic Typecasting:
+
+RTTI:
+==>RunTime type Identification.
+==>provide a standard way for a program to determone the type of object at runtime
+==>RTTI supports dynamic cast operator ,
+
+
+==>The dynamic_cast operator is mainly used to perform downcasting (converting a pointer/reference of a base class to a derived class). It ensures type safety by performing a runtime check to verify the validity of the conversion.
+
+==>Syntax of dynamic_cast
+dynamic_cast <new_type> (expression);
+==> dynamic_cast is a runtime cast operator used to perform conversion of one type variable to another only on class pointers and references. It means it checks the valid casting of the variables at the run time
+
+#include <iostream> 
+using namespace std; 
+  
+// Base Class 
+class Animal { 
+public: 
+    virtual void speak() 
+    { 
+        cout << "Animal speaks." << endl; 
+    } 
+}; 
+  
+// Derived Class 
+class Dog : public Animal { 
+public: 
+    void speak() 
+    { 
+        cout << "Dog barks." << endl; 
+    } 
+}; 
+  
+// Derived Class 
+class Cat : public Animal { 
+public: 
+    void speak() 
+    { 
+        cout << "Cat meows." << endl; 
+    } 
+}; 
+  
+int main() 
+{ 
+    // base class pointer to derived class object 
+    Animal* animalPtr = new Dog(); 
+  
+    // downcasting 
+    Dog* dogPtr = dynamic_cast<Dog*>(animalPtr); 
+  
+    // checking if the typecasting is successfull 
+    if (dogPtr) { 
+        dogPtr->speak(); 
+    } 
+    else { 
+        cout << "Failed to cast to Dog." << endl; 
+    } 
+   
+    
+    return 0; 
+}
+Output
+Dog barks.
+=============================================================
+
+class Base
+{
+} 
+class Cat:public class Animal
+{
+}
+class Dog:public class Animal
+{
+}
+
+Base * bp1=new cat()//allowed
+Base* bp2=new Dog();//allowed
+Dog * pd=dynamic_cast<Dog*>(bp1);
+Cat*  pd1=dynamic_cast<Dog*>(bp2);
+
+
+==>dynamic_cast <new type>(Expression)
+==>Involves a runtime type check
+==>base class has to be polymorphic
+==>on success returns a value of new_type
+==>on failure it return null pointer
+===================================================
+===============================================================
+3. const_cast
+==>The const_cast operator is used to modify the const or volatile qualifier of a variable. It allows programmers to temporarily remove the constancy of an object and make modifications.
+==>The const_cast is used to change or manipulate the const behavior of the source pointer. It means we can perform the const in two ways: setting a const pointer to a non-const pointer or deleting or removing the const from a const pointer.
+
+1//PASSING CONST DATA TO A FUNCTION THAT DOESNOT RECEIVE CONST
+#include <iostream>  
+using namespace std;  
+  
+// define a function  
+int disp(int *pt)  
+{  
+    return (*pt * 10);  
+}  
+  
+int main ()  
+{  
+    // declare a const variable  
+     int num = 50;  
+    const int * const pt = &num; // get the address of num  
+      
+    // use const_cast to chnage the constness of the source pointer  
+    int *ptr = const_cast <int *> (pt);  
+    cout << " The value of ptr cast: " << disp(ptr);  
+    return 0;  
+       
+}  
+
+
+
+
+2//CHANGE NON CONST CLASS MEMBERS INSIDE A CONST MEMBER FUNCTION
+class A
+{
+	int x;
+	public :
+	void f(int i)const
+	{
+		//this->x=i;//Error
+		this-> x=const_cast<A*>(this)->x=i;
+	}
+};
+//inside const member function,this pointer is treated as  const pointer to const obj of type A .we need to cast away constness of this pointer. type of this pointer is same as that of class.
+
+class A
+{
+int x;
+public:
+void f(int i)const
+{
+//this->x=i;
+const_cast<A*>(this)->x=i;
+}
+void print()
+{
+cout<<"x="<<x;
+}
+};
+int main()
+{
+A a;
+a.f(10);
+a.print();
+}
+
+// C++ program to illustrate the const_cast 
+#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+  
+    const int number = 5; 
+    // Pointer to a const int 
+    const int* ptr = &number; 
+  
+    // int* nonConstPtr = ptr; if we use this 
+    // instead of without using const_cast 
+    // we will get error of invalid conversion 
+    int* nonConstPtr = const_cast<int*>(ptr); 
+    *nonConstPtr = 10; 
+  
+    cout << "Modified number: " << *nonConstPtr; 
+  
+    return 0; 
+}
+
+Output
+Modified number: 10
+In the above example, we have modified the value of the const type pointer by changing its qualifier from const to non-const and then printing the modified value.
+
+==================================================================================================
+reinterpret_cast
+
+The reinterpret_cast operator is used to convert the pointer to any other type of pointer. It does not perform any check whether the pointer converted is of the same type or not.
+
+Syntax of reinterpret_cast
+reinterpret_cast <new_type> (expression);
+
+
+
+Note: const_cast and reinterpret_cast are generally not reccommended as they vulnerable to different kinds of errors.
+
+The reinterpret_cast type casting is used to cast a pointer to any other type of pointer whether the given pointer belongs to each other or not. It means it does not check whether the pointer or the data pointed to by the pointer is the same or not. And it also cast a pointer to an integer type or vice versa.
+
+Syntax of the reinterpret_cast type
+
+reinterpret_cast <type> expression;  
+Program to use the Reinterpret Cast in C++
+
+Let's write a program to demonstrate the conversion of a pointer using the reinterpret in C++ language.
+
+#include <iostream>  
+using namespace std;  
+  
+int main ()  
+{  
+    // declaration of the pointer variables  
+    int *pt = new int (65);  
+      
+    // use reinterpre_cast operator to type cast the pointer variables  
+    char *ch = reinterpret_cast <char *> (pt);  
+      
+    cout << " The value of pt: " << pt << endl;  
+    cout << " The value of ch: " << ch << endl;  
+      
+    // get value of the defined variable using pointer  
+    cout << " The value of *ptr: " << *pt << endl;  
+    cout << " The value of *ch: " << *ch << endl;  
+    return 0;  
+      
+}  
+Output:
+
+The value of pt: 0x5cfed0
+The value of ch: A
+The value of *ptr: 65
+The value of *ch: A
+
+=========================================================================
+typedef keyword in C++ is used for aliasing existing data types, user-defined data
+ types, and pointers to a more meaningful name. Typedefs allow you to give
+  descriptive names to standard data types, which can also help you self-document 
+  your code. Mostly typedefs are used for aliasing, only if the predefined name is 
+  too long or complex to write again and again.  The unnecessary use of typedef is 
+  generally not a good practice.
+
+Syntax:
+
+typedef <current_name> <new_name>
+
+*/
+
+
+Applications of typedef in C++
+
+    typedef in C++ can be used for aliasing predefined data types with long names.
+    It can be used with STL data structures like Vectors, Strings, Maps, etc.
+    typedef can be used with arrays as well.
+    We can use typedef with normal pointers 
+
+/*#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+    
+    
+   typedef int p; 
+  p a=10;
+    
+  
+    cout << "a is: " << a<< "\n"; 
+    
+    return 0; 
+}*/
+
+/*#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+    int a = 10; 
+    int b = 20; 
+    // iPtr can now be used to create new pointers of type 
+    // int 
+    typedef int* iPtr; 
+  
+    iPtr pointer_to_a = &a; 
+    iPtr pointer_to_b = &b; 
+  
+    cout << "a is: " << *pointer_to_a << "\n"; 
+    cout << "b is: " << *pointer_to_b << "\n"; 
+  
+    return 0; 
+}*/
+
+#include <iostream> 
+using namespace std; 
+ class emp 
+{
+ 	int id;
+ 	public:
+ 		void show()
+ 		{
+ 			cout<<"in show";
+		 }
+};
+int main() 
+{ 
+	typedef emp e;
+	e obj;
+	obj.show(); 
+
+
+}
+
+
+
